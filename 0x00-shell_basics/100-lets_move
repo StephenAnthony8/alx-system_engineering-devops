@@ -1,2 +1,2 @@
 #!/bin/bash
-mv s* /tmp/u
+mv S* /tmp/u
