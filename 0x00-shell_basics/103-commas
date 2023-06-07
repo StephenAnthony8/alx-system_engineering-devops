@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -aCmF
+ls -aCm --file-type
