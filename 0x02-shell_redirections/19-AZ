@@ -1,2 +1,2 @@
 #!/bin/bash
-cat README.md | tr -s Ac Ze
+cat README.md | tr 'Ac' 'Ze'
