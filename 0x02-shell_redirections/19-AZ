@@ -1,2 +1,2 @@
 #!/bin/bash
-cat README.md | tr -s R Z | tr -s c e
+cat README.md | tr -s A Z | tr -s c e
