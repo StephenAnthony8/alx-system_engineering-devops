@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Displays the content of the current directory in list format
+# Removes the initial numbers
+
+for ((;;))
+do
+	ls | cut -d '-' -f2-
+	break
+done
