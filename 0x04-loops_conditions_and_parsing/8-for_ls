@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Displays the content of the current directory in list format
 # Removes the initial numbers
-l_ist=$(find  -maxdepth 1 -not -name '.*' | cut -d '-' -f2- |cut -d '/' -f2-)
+l_ist=$(find  . -maxdepth 1 -not -name '.*' | cut -d '-' -f2- |cut -d '/' -f2-)
 for i in $l_ist
 do
-	echo $i
+	echo "$i"
 done
