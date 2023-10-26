@@ -3,13 +3,13 @@
 
 for i in {1..100}
 do
-	if [ $(expr $i % 15) == 0 ]
+	if [ "$((i % 15))" == 0 ]
 	then
 		echo "FizzBuzz"
-	elif [ $(expr $i % 5) == 0 ]
+	elif [ "$((i % 5))" == 0 ]
 	then
 		echo "Buzz"
-	elif [ $(expr $i % 3) == 0 ]
+	elif [ "$((i % 3))" == 0 ]
 	then
 		echo "Fizz"
 	else
