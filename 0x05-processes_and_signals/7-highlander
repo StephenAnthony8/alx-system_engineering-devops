@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# displays 'To infinity and beyond' indefinetly
+
+function handle_sig()
+{
+	echo "I am invincible!!!"
+}
+trap handle_sig SIGTERM
+for ((;;))
+do
+	echo "To infinity and beyond"
+	sleep 2
+done
