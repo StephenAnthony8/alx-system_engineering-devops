@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Prints out the content of etc/passwd in cut format
+# shellcheck disable=SC2002
+while true
+do
+	cat /etc/passwd | cut -d : -f 1,3,6
+	break
+done
