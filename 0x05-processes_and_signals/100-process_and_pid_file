@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# file that
+# DIsplays to infinity and beyond indefinetly
+# creates a new file containing its pid
+# Displays I hate the killcommand when receiving a sigterm
+# Displays a Y U no love me  when receiving a sigint
+# Deletes the file and terminates when receiving a sigquit
+
+echo $$ > /var/run/myscript.pid
+function sig_t()
+{
+	echo "I hate the kill command"
+	rm /var/run/myscript.pid
+	pkill --signal SIGTERM -f 100-process_and_pid_file
+}
+function sig_i()
+{
+	echo "Y U no love me"
+	pkill --signal SIGINT -f 100-process_and_pid_file
+}
+function sig_q()
+{
+	rm /var/run/myscript.pid
+	pkill --signal SIGQUIT -f 100-process_and_pid_file
+}
+trap sig_q SIGQUIT
+trap sig_i SIGINT
+trap sig_t SIGTERM
+
+for ((;;))
+do
+	echo "To infinity and beyond"
+done
