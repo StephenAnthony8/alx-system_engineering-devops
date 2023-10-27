@@ -11,17 +11,17 @@ function sig_t()
 {
 	echo "I hate the kill command"
 	rm /var/run/myscript.pid
-	pkill --signal SIGTERM -f 100-process_and_pid_file
+	exit 15
 }
 function sig_i()
 {
 	echo "Y U no love me"
-	pkill --signal SIGINT -f 100-process_and_pid_file
+	exit 2
 }
 function sig_q()
 {
 	rm /var/run/myscript.pid
-	pkill --signal SIGQUIT -f 100-process_and_pid_file
+	exit 3
 }
 trap sig_q SIGQUIT
 trap sig_i SIGINT
@@ -30,4 +30,5 @@ trap sig_t SIGTERM
 for ((;;))
 do
 	echo "To infinity and beyond"
+	#sleep 2
 done
