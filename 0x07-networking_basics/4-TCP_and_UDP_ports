@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Shows only listening sockets alongside their sockets and program names
+
+netstat -lp
