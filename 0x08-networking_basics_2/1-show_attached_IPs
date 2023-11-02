@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# acquires the ip addresses on the machine its executed on
+
+ifconfig | grep -w "inet" | cut -d ' ' -f10
