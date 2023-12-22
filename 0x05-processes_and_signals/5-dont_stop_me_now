@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# kills the script 4
+
+p_id_kill=$(pgrep -f 4-to_infinity_and_beyond)
+kill "$p_id_kill"

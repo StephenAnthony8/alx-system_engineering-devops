@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# lists processes pid
+
+pgrep -f 0-what-is-my-pid
