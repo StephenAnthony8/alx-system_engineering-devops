@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# script that installs nginx on server
+
+sudo apt update && sudo apt install -y nginx
+
+sudo nginx
+
+# Create a simple HTML file with "Hello World!" content
+echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
+
+# Restart Nginx
+sudo nginx -s reload
+
