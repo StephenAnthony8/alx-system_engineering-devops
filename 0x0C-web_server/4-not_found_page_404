@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Script configuring 404 page
+
+sudo apt update && sudo apt install -y nginx
+
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html > /dev/null
+
+echo "error_page 404 /404.html;" | sudo tee -a /etc/nginx/sites-available/default > /dev/null
+echo "location = /404.html {" | sudo tee -a /etc/nginx/sites-available/default > /dev/null
+echo "    root /var/www/html;" | sudo tee -a /etc/nginx/sites-available/default > /dev/null
+echo "    internal;" | sudo tee -a /etc/nginx/sites-available/default > /dev/null
+echo "}" | sudo tee -a /etc/nginx/sites-available/default > /dev/null
+
+sudo service nginx reload
