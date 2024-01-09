@@ -1,17 +1,20 @@
-# ssh config via puppet
+# using puppet to make changes to the default ssh config file
+# so that one can connect to a server without typing a password.
 
-file { '/home/your_username/.ssh':
-  ensure  => directory,
-  mode    => '0700',
-  require => File['/home/your_username'],
+include stdlib
+
+file_line { 'SSH Private Key':
+  path               => '/etc/ssh/ssh_config',
+  line               => '    IdentityFile ~/.ssh/school',
+  match              => '^[#]+[\s]*(?i)IdentityFile[\s]+~/.ssh/id_rsa$',
+  replace            => true,
+  append_on_no_match => true
+}
+file_line { 'Deny Password Auth':
+  path               => '/etc/ssh/ssh_config',
+  line               => '    PasswordAuthentication no',
+  match              => '^[#]+[\s]*(?i)PasswordAuthentication[\s]+(yes|no)$',
+  replace            => true,
+  append_on_no_match => true
 }
 
-file { '/home/your_username/.ssh/config':
-  ensure  => present,
-  content => "Host ubuntu@54.144.150.154\n" \
-    "    PasswordAuthentication no\n" \
-    "    HostName 54.144.150.153\n" \
-    "    IdentityFile ~/.ssh/school\n",
-  mode    => '0600',
-  require => File['/home/your_username/.ssh'],
-}
