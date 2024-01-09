@@ -1,14 +1,25 @@
 #!/usr/bin/env bash
-# Script configuring 404 page
+# install Nginx listening on port 80 & Serve page with 'Hello World' string on new server
+#
 
-sudo apt update && sudo apt install -y nginx
+sudo apt-get update -y -qq && \
+	 sudo apt-get install nginx -y
 
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html > /dev/null
+sudo service nginx start
 
-echo "error_page 404 /404.html;" | sudo tee -a /etc/nginx/sites-available/default > /dev/null
-echo "location = /404.html {" | sudo tee -a /etc/nginx/sites-available/default > /dev/null
-echo "    root /var/www/html;" | sudo tee -a /etc/nginx/sites-available/default > /dev/null
-echo "    internal;" | sudo tee -a /etc/nginx/sites-available/default > /dev/null
-echo "}" | sudo tee -a /etc/nginx/sites-available/default > /dev/null
+sudo ufw allow 'Nginx HTTP'
 
-sudo service nginx reload
+sudo chown -R "$USER":"$USER" /var/www/html
+sudo chmod -R 755 /var/www
+
+cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bckp
+
+echo -e "Hello World!" > /var/www/html/index.nginx-debian.html
+
+sudo sed -i '24i\	rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+
+echo "Ceci n'est pas une page" >> /var/www/html/error_404.html
+sudo sed -i '25i\	error_page 404 /error_404.html;' /etc/nginx/sites-available/default
+
+sudo service nginx restart
+
