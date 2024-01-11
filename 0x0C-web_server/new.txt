@@ -1,0 +1,15 @@
+events {
+	worker_processes auto;
+}
+
+http {
+	# file types
+        include /etc/nginx/mime.types;
+
+	#server config
+        server {
+		# listening port
+                listen 80;
+                root /srv;
+        }
+}

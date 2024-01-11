@@ -1,13 +1,36 @@
 #!/usr/bin/env bash
 # script that installs nginx on server
 
+#run updates
 sudo apt update && sudo apt install -y nginx
 
-sudo nginx
+#start nginx
+sudo service start nginx
 
-# Create a simple HTML file with "Hello World!" content
-echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
+#create config file
+config_file=$(cat <<EOF
+events {
+
+}
+
+http {
+	# file types
+        include /etc/nginx/mime.types;
+
+	#server config
+        server {
+		# listening port
+                listen 80;
+                root /srv;
+        }
+}
+EOF
+)
+#copy config_file content to nginx.conf
+echo "$config_file" |sudo tee /etc/nginx/nginx.conf > /dev/null
+
+# Create HTML file with "Hello World!"
+echo "Hello World!" | sudo tee /srv/index.html > /dev/null
 
 # Restart Nginx
 sudo nginx -s reload
-
