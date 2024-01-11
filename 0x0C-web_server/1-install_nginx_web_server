@@ -2,7 +2,9 @@
 # script that installs nginx on server
 
 #run updates
-sudo apt update && sudo apt install -y nginx
+sudo apt update
+sudo apt upgrade -y
+sudo apt install -y nginx
 
 #create config file
 config_file=$(cat <<EOF
