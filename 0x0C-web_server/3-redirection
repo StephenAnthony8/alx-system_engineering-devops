@@ -1,21 +1,24 @@
 #!/usr/bin/env bash
-# Configure machine by installing Nginx listening on port 80 & page returning a Hello World string
+# script that installs nginx on server
 
-
-sudo apt-get update -y -qq && \
-         sudo apt-get install nginx -y
+#run updates
+sudo apt update
+# sudo apt upgrade -y
+sudo apt install -y nginx
 
 sudo service nginx start
 
-sudo ufw allow 'Nginx HTTP'
+# Create HTML file with "Hello World!"
+echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
 
-sudo chown -R "$USER":"$USER" /var/www/html
-sudo chmod -R 755 /var/www
+#configure /redirect_me to return 301
 
-cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bckp
+former_tag="server_name _;"
 
-echo -e "Hello World!" > /var/www/html/index.nginx-debian.html
+new_tag="\n\tlocation = \/redirect_me {\n\t\treturn 301;\n\t}"
 
-sudo sed -i '24i\       rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+replacement_tag="$former_tag$new_tag"
+sudo sed -z -i "s/server_name _;\n/$replacement_tag/" /etc/nginx/sites-enabled/default
 
-sudo service nginx restart
+# Restart Nginx
+sudo nginx -t -q && sudo nginx -s reload
