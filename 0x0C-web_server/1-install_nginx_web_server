@@ -3,7 +3,7 @@
 
 #run updates
 sudo apt update
-sudo apt upgrade -y
+# sudo apt upgrade -y
 sudo apt install -y nginx
 
 #create config file
