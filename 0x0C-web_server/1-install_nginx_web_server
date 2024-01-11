@@ -4,9 +4,6 @@
 #run updates
 sudo apt update && sudo apt install -y nginx
 
-#start nginx
-sudo service start nginx
-
 #create config file
 config_file=$(cat <<EOF
 events {
