@@ -9,28 +9,8 @@ sudo apt install -y nginx
 # Create HTML file with "Hello World!"
 echo "Hello World!" | sudo tee /srv/index.html > /dev/null
 
-#create config file
-config_file=$(cat <<EOF
-events {
-        worker_connections 768;
-        # multi_accept on;
-}
-
-http {
-	# file types
-        include /etc/nginx/mime.types;
-
-	#server config
-        server {
-		# listening port
-                listen 80;
-                root /srv;
-        }
-}
-EOF
-)
-#copy config_file content to nginx.conf
-echo "$config_file" |sudo tee /etc/nginx/nginx.conf > /dev/null
+#changes root location
+sudo sed -i "0,/root \/var\/www\/html/s//root \/srv/" /etc/nginx/sites-enabled/default
 
 # Restart Nginx
 sudo nginx -t -q && sudo nginx -s reload
