@@ -7,10 +7,10 @@ sudo apt update
 sudo apt install -y nginx
 
 # Create HTML file with "Hello World!"
-echo "Hello World!" | sudo tee /srv/index.html > /dev/null
+echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
 
 #changes root location
-sudo sed -i "0,/root \/var\/www\/html/s//root \/srv/" /etc/nginx/sites-enabled/default
+# sudo sed -i "0,/root \/var\/www\/html/s//root \/srv/" /etc/nginx/sites-enabled/default
 
 # Restart Nginx
 sudo nginx -t -q && sudo nginx -s reload
