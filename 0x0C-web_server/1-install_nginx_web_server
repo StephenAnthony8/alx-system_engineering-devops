@@ -6,6 +6,9 @@ sudo apt update
 # sudo apt upgrade -y
 sudo apt install -y nginx
 
+# Create HTML file with "Hello World!"
+echo "Hello World!" | sudo tee /srv/index.html > /dev/null
+
 #create config file
 config_file=$(cat <<EOF
 events {
@@ -28,9 +31,6 @@ EOF
 )
 #copy config_file content to nginx.conf
 echo "$config_file" |sudo tee /etc/nginx/nginx.conf > /dev/null
-
-# Create HTML file with "Hello World!"
-echo "Hello World!" | sudo tee /srv/index.html > /dev/null
 
 # Restart Nginx
 sudo nginx -t -q && sudo nginx -s reload
