@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Configure server to have a custom header
+
+sudo sed -i "0,/root \/var\/www\/html;/s//root \/var\/www\/html;\n\n\tadd_header X-Served-By \$hostname;/" /etc/nginx/sites-enabled/default
+
+sudo nginx -t -q && sudo nginx -s reload
