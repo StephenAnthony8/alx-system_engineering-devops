@@ -1,0 +1,30 @@
+#!/usr/bin/bash
+#configures a loadbalancer
+
+#update & installation
+sudo apt update && sudo apt install haproxy
+
+# allows for HAproxy to be managed via init script
+echo "ENABLED=1" >> /etc/default/haproxy
+
+#moves original cfg file to .original extension
+mv /etc/haproxy/haproxy.cfg{,.original}
+cp /etc/haproxy/haproxy.cfg.original /etc/haproxy/haproxy.cfg
+
+# server config
+input=$(cat <<EOF
+
+frontend web-frontend
+        bind *:80
+        default_backend web-backend
+backend web-backend
+        balance roundrobin
+        server web1 100.26.152.138:80 check
+        server web2 100.25.33.164:80 check
+EOF
+)
+
+echo "$input" >> /etc/haproxy/haproxy.cfg
+
+# restart service
+sudo systemctl restart haproxy
