@@ -1,0 +1,30 @@
+#!/usr/bin/bash
+# display subdomain information about a site
+# shellcheck disable=SC2086
+
+
+
+
+	#dig "$subdomain_name"
+       #	| awk '{print "The subdomain www is a "$4 " and points to " $5}'
+
+new_name="$1"
+function domain_dig {
+	domain_name="$2.$1"
+	
+	response=$(dig $domain_name | grep -A1 'ANSWER SECTION'| tail -1)
+	record=$(echo "$response" | awk '{print $4}')
+	ip_addr=$(echo "$response" | awk '{print $5}')
+
+	echo "The subdomain $2 is a $record record and points to $ip_addr"
+}
+
+if [[ $# -lt 2 ]]; then
+	p_arr=('www' 'lb-01' 'web-01' 'web-02')
+
+	for i in "${p_arr[@]}";do
+		domain_dig "$new_name" "$i"
+	done
+else
+	domain_dig "$new_name" "$2"
+fi
