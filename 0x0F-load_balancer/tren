@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 # Installs and configures HAproxy in a load balancer server
 
-sudo apt update && sudo apt install -y haproxy
+# apt-get update
+# apt-get install -y haproxy
 
-echo "ENABLED=1" | sudo tee /etc/default/haproxy
+# echo "ENABLED=1" >> /etc/default/haproxy
 
 haproxy_config=$(cat <<EOF
 
@@ -23,6 +24,8 @@ backend web_backend
 EOF
 )
 
-echo "$haproxy_config" | sudo tee -a /etc/haproxy/haproxy.cfg > /dev/null
+echo "$haproxy_config"
+# | sudo tee -a /etc/haproxy/haproxy.cfg > /dev/null
 
-haproxy -c -f /etc/haproxy/haproxy.cfg && sudo service haproxy start && sudo service haproxy reload
+# systemctl start haproxy
+# systemctl enable haproxy
