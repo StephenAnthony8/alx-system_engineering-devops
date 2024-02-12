@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# secures and switches apache for nginx on port 8080
+
+sed -i 's/user data/user nginx/1' /etc/nginx/nginx.conf
+sed -i 's/listen 80 default_server/listen 8080 default_server/1' /etc/nginx/sites-enabled/default
+sed -i 's/listen \[::\]:80 default_server/listen \[::\]:8080 default_server/1' /etc/nginx/sites-enabled/default
+service apache2 stop
+service nginx start
+
