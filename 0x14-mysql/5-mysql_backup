@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# sql data dump && archive creation
+
+echo "getting date"
+label=$(date "+%d-%m-%y")
+
+echo "creating mysql backup"
+mysqldump -uroot -p"$1" --all-databases > backup.sql
+
+echo "moving backup into $label.tar.gz"
+tar -czvf "$label".tar.gz backup.sql
+
+echo "done"
