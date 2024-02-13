@@ -2,8 +2,8 @@
 # secures and switches apache for nginx on port 8080
 
 sed -i 's/user data/user nginx/1' /etc/nginx/nginx.conf
-sed -i 's/80/8080/1' /etc/nginx/sites-enabled/default
+sed -i 's/80/8080/2' /etc/nginx/sites-enabled/default
 chmod 644 /etc/nginx/nginx.conf
-service apache2 stop
+sudo service apache2 stop
 sudo -u nginx service nginx start
 
