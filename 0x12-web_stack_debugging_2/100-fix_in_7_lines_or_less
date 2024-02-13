@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
-# secures and switches apache for nginx on port 8080
-
+# secures & switch apache2 for nginx on :8080
 sed -i 's/user data/user nginx/1' /etc/nginx/nginx.conf
 sed -i 's/80/8080/g' /etc/nginx/sites-enabled/default
 chmod 644 /etc/nginx/nginx.conf
 sudo service apache2 stop
 sudo -u nginx service nginx start
-
