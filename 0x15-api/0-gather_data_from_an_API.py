@@ -35,7 +35,7 @@ def request_get(employee_id):
     complete_status = f"{len(true_complete)}/{total_todo}"
 
     # output
-    print(f"Employee {name} is done with tasks({complete_status})")
+    print(f"Employee {name} is done with tasks({complete_status}):")
     for task in true_complete:
         print(f"\t {task.get('title')}")
 
