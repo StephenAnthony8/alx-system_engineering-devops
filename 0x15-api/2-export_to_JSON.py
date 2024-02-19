@@ -37,13 +37,13 @@ def ID_to_json(employee_id):
                 "username": name
             })
 
-        task_json = json.dumps(task_dict)
+        task_json = json.JSONEncoder().encode(task_dict)
 
     # create and write to file in JSON format
     file_path = f"{employee_id}.json"
 
     with open(file_path, "w") as json_file:
-        json.dump(task_json, json_file, ensure_ascii=True)
+        json_file.write(task_json)
 
 
 if __name__ == "__main__":
