@@ -23,7 +23,7 @@ def ID_to_json(employee_id):
 
     # name of employee
     with request.urlopen(f"{url_user}") as user:
-        name = json.loads(user.read()).get('name')
+        name = json.loads(user.read()).get('username')
 
     # total tasks
     with request.urlopen(f"{url_user}/todos") as f:
@@ -32,7 +32,7 @@ def ID_to_json(employee_id):
         task_dict = {employee_id: []}
         for task in total_todo:
             task_dict[employee_id].append({
-                'task': task.get("task"),
+                'task': task.get("title"),
                 "completed": task.get("completed"),
                 "username": name
             })
@@ -43,7 +43,7 @@ def ID_to_json(employee_id):
     file_path = f"{employee_id}.json"
 
     with open(file_path, "w") as json_file:
-        json.dump(task_json, json_file)
+        json.dump(task_json, json_file, ensure_ascii=True)
 
 
 if __name__ == "__main__":
