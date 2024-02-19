@@ -37,7 +37,7 @@ def request_get(employee_id):
     # output
     print(f"Employee {name} is done with tasks({complete_status}):")
     for task in true_complete:
-        print(f"     {task.get('title')}")
+        print(f"\t {task.get('title')}")
 
 
 if __name__ == "__main__":
