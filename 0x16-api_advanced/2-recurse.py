@@ -12,7 +12,6 @@ def recurse(subreddit, hot_list=[], query=''):
 
     hot_url = f"https://www.reddit.com/r/{subreddit}/hot.json{query}"
 
-
     hot_posts = requests.get(hot_url)
 
     if (hot_posts.status_code == 200):
@@ -27,7 +26,7 @@ def recurse(subreddit, hot_list=[], query=''):
         for post in hot_posts.get('children'):
             hot_list.append(post.get('data').get('title'))
 
-    return(None if len(hot_list) == 0 else hot_list)
+    return (None if len(hot_list) == 0 else hot_list)
 
 
 if __name__ == "__main__":
