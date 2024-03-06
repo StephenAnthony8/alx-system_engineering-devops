@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-""" Script querying reddit API """
+"""
+Script querying reddit API
+"""
 import json
 import requests
 import sys
