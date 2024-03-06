@@ -19,11 +19,11 @@ def recurse(subreddit, hot_list=[], query=''):
 
         q_string = h_posts.get('after')
         if (q_string):
-            recurse_qstring = recurse(subreddit, query=q_string)
+            recurse_qstring = recurse(subreddit, query=f"?after={q_string}")
             if (recurse_qstring is not None):
                 [hot_list.append(x) for x in recurse_qstring]
 
-        for post in hot_posts.get('children'):
+        for post in h_posts.get('children'):
             hot_list.append(post.get('data').get('title'))
 
     return (None if len(hot_list) == 0 else hot_list)
