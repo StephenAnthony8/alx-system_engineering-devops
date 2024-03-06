@@ -13,7 +13,8 @@ def number_of_subscribers(subreddit):
     subreddit_url = f"https://www.reddit.com/r/{subreddit}.json"
 
     headers = {
-        "User-Agent": "linux:0x16.api.advanced:v1.0.0"
+        "User-Agent": "linux:0x16.api.advanced:v1.0.0",
+        'client_id': '9FJ_bWxq1SY7zOcYkRXBbw'
     }
 
     subs_count = requests.get(subreddit_url,
