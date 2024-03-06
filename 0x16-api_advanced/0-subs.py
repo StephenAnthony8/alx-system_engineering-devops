@@ -12,7 +12,14 @@ def number_of_subscribers(subreddit):
 
     subreddit_url = f"https://www.reddit.com/r/{subreddit}.json"
 
-    subs_count = requests.get(subreddit_url)
+    headers = {
+        "User-Agent": "linux:0x16.api.advanced:v1.0.0"
+    }
+
+    subs_count = requests.get(subreddit_url,
+                              headers=headers,
+                              allow_redirects=False
+                              )
 
     if (subs_count.status_code == 200):
         subs_count = json.loads(subs_count.text)
