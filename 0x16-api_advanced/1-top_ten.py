@@ -14,10 +14,13 @@ def top_ten(subreddit):
     hot_posts = requests.get(hot_url)
 
     if (hot_posts.status_code == 200):
-        h_posts = json.loads(hot_posts.text).get('data').get('children')
+        try:
+            h_posts = json.loads(hot_posts.text).get('data').get('children')
 
-        for post in h_posts:
-            print(post.get('data').get('title'))
+            for post in h_posts:
+                print(post.get('data').get('title'))
+        except Exception:
+            print(None)
     else:
         print(None)
 
